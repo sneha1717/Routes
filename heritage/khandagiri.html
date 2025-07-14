@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khandagiri & Udayagiri Caves | Explore Khordha</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="icon" href="../images/favicon.ico">
+</head>
+<body>
+  <!-- Navbar Include -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Title & Carousel -->
+  <section class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <div id="khandagiriCarousel" class="carousel slide shadow" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="" class="d-block w-100" alt="Khandagiri & Udayagiri Caves 1">
+            </div>
+            <div class="carousel-item">
+              <img src="" class="d-block w-100" alt="Khandagiri & Udayagiri Caves 2">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#khandagiriCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#khandagiriCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold mb-3">Khandagiri & Udayagiri Caves</h1>
+        <p class="lead">The twin hills of Khandagiri and Udayagiri are home to ancient rock-cut caves, dating back to the 1st century BCE. These caves are significant for their Jain heritage, inscriptions, and panoramic views of Bhubaneswar.</p>
+        <p>The caves were carved during the reign of King Kharavela and served as residential blocks for Jain monks. The site is a major archaeological and tourist attraction, offering a glimpse into Odisha's ancient past.</p>
+        <a href="https://goo.gl/maps/6Qk8Qw1Qw2vQ2QkA7" target="_blank" class="btn btn-warning mt-2">Get Directions</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Google Maps -->
+  <section class="container mb-5">
+    <h2 class="h5 mb-3">Location</h2>
+    <div class="ratio ratio-16x9 rounded shadow">
+      <iframe src="https://www.google.com/maps?q=Khandagiri+Udayagiri+Caves+Bhubaneswar&output=embed" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <!-- Nearby Food & Hotels -->
+  <section class="container mb-5">
+    <h2 class="h5 mb-3">Nearby Food & Hotels</h2>
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Hotel Khandagiri</h5>
+            <p class="mb-1">Rating: ⭐⭐⭐ (3.8/5)</p>
+            <p class="mb-1">Phone: <a href="tel:+919876543216">+91 98765 43216</a></p>
+            <p class="mb-1">Near Khandagiri Square, Bhubaneswar</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Caves View Restaurant</h5>
+            <p class="mb-1">Rating: ⭐⭐⭐ (3.7/5)</p>
+            <p class="mb-1">Phone: <a href="tel:+919812345684">+91 98123 45684</a></p>
+            <p class="mb-1">Khandagiri, Bhubaneswar</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Travel Times -->
+  <section class="container mb-5">
+    <h2 class="h5 mb-3">Sample Travel Times</h2>
+    <ul>
+      <li>By Car: 25 min from Bhubaneswar Railway Station</li>
+      <li>By Train: 30 min (nearest station: Bhubaneswar, then taxi/auto)</li>
+      <li>By Bus: 35 min from Baramunda Bus Stand</li>
+    </ul>
+  </section>
+
+  <!-- Floating Chatbot Icon -->
+  <div id="chatbot-icon" class="floating-icon" title="Chat with us!">
+    <img src="../images/chatbot.svg" alt="Chatbot" width="48" height="48">
+  </div>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollTopBtn" class="scroll-top-btn" title="Go to top">&#8679;</button>
+
+  <!-- Light/Dark Mode Toggle -->
+  <button id="darkModeToggle" class="dark-mode-toggle" title="Toggle light/dark mode">
+    <span id="darkModeIcon">🌙</span>
+  </button>
+
+  <!-- Footer Include -->
+  <div id="footer-placeholder"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/script.js"></script>
+  <script>
+    // Load navbar and footer
+    fetch('../header.html').then(res => res.text()).then(data => {
+      document.getElementById('navbar-placeholder').innerHTML = data;
+    });
+    fetch('../footer.html').then(res => res.text()).then(data => {
+      document.getElementById('footer-placeholder').innerHTML = data;
+    });
+  </script>
+</body>
+</html> 

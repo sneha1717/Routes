@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotels | Explore Khordha</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="images/favicon.ico">
+</head>
+<body>
+  <!-- Navbar Include -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Hero Banner -->
+  <section class="py-5 text-center bg-primary text-white mb-4">
+    <div class="container">
+      <h1 class="display-4 fw-bold mb-2">Hotels in Khordha</h1>
+      <p class="lead">Find the best places to stay for every budget.</p>
+      <div class="mt-3">
+        <button class="btn btn-warning mx-1" onclick="filterHotels('all')">All</button>
+        <button class="btn btn-outline-light mx-1" onclick="filterHotels('under1000')">Under ₹1000</button>
+        <button class="btn btn-outline-light mx-1" onclick="filterHotels('1000to2000')">₹1000–₹2000</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="container pb-5">
+    <div class="row g-4" id="hotels-list">
+      <!-- Hotel Card Example -->
+      <div class="col-12 col-md-6 col-lg-4 hotel-card" data-price="under1000">
+        <div class="card h-100 animate__animated animate__fadeInUp">
+          <img src="" class="card-img-top" alt="Hotel Kalinga Ashok">
+          <div class="card-body">
+            <h5 class="card-title">Hotel Kalinga Ashok</h5>
+            <p class="mb-1">Price: <span class="fw-bold">₹950</span></p>
+            <p class="mb-1">Rating: ⭐⭐⭐ (3.8/5)</p>
+            <p class="mb-1">Phone: <a href="tel:+919876543211">+91 98765 43211</a></p>
+            <p class="mb-1">Gautam Nagar, Bhubaneswar</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 hotel-card" data-price="1000to2000">
+        <div class="card h-100 animate__animated animate__fadeInUp">
+          <img src="" class="card-img-top" alt="Hotel Swosti Premium">
+          <div class="card-body">
+            <h5 class="card-title">Hotel Swosti Premium</h5>
+            <p class="mb-1">Price: <span class="fw-bold">₹1800</span></p>
+            <p class="mb-1">Rating: ⭐⭐⭐⭐ (4.1/5)</p>
+            <p class="mb-1">Phone: <a href="tel:+919812345679">+91 98123 45679</a></p>
+            <p class="mb-1">Jaydev Vihar, Bhubaneswar</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 hotel-card" data-price="under1000">
+        <div class="card h-100 animate__animated animate__fadeInUp">
+          <img src="" class="card-img-top" alt="Hotel Pushpak">
+          <div class="card-body">
+            <h5 class="card-title">Hotel Pushpak</h5>
+            <p class="mb-1">Price: <span class="fw-bold">₹900</span></p>
+            <p class="mb-1">Rating: ⭐⭐⭐ (3.7/5)</p>
+            <p class="mb-1">Phone: <a href="tel:+919876543212">+91 98765 43212</a></p>
+            <p class="mb-1">Kalpana Square, Bhubaneswar</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 hotel-card" data-price="1000to2000">
+        <div class="card h-100 animate__animated animate__fadeInUp">
+          <img src="" class="card-img-top" alt="Hotel Suncity">
+          <div class="card-body">
+            <h5 class="card-title">Hotel Suncity</h5>
+            <p class="mb-1">Price: <span class="fw-bold">₹1200</span></p>
+            <p class="mb-1">Rating: ⭐⭐⭐ (3.9/5)</p>
+            <p class="mb-1">Phone: <a href="tel:+919812345680">+91 98123 45680</a></p>
+            <p class="mb-1">Janpath, Bhubaneswar</p>
+          </div>
+        </div>
+      </div>
+      <!-- Add more hotels as needed -->
+    </div>
+  </div>
+
+  <!-- Floating Chatbot Icon -->
+  <div id="chatbot-icon" class="floating-icon" title="Chat with us!">
+    <img src="images/chatbot.svg" alt="Chatbot" width="48" height="48">
+  </div>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollTopBtn" class="scroll-top-btn" title="Go to top">&#8679;</button>
+
+  <!-- Light/Dark Mode Toggle -->
+  <button id="darkModeToggle" class="dark-mode-toggle" title="Toggle light/dark mode">
+    <span id="darkModeIcon">🌙</span>
+  </button>
+
+  <!-- Footer Include -->
+  <div id="footer-placeholder"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    // Load navbar and footer
+    fetch('header.html').then(res => res.text()).then(data => {
+      document.getElementById('navbar-placeholder').innerHTML = data;
+    });
+    fetch('footer.html').then(res => res.text()).then(data => {
+      document.getElementById('footer-placeholder').innerHTML = data;
+    });
+
+    // Hotel filter logic
+    function filterHotels(range) {
+      document.querySelectorAll('.hotel-card').forEach(card => {
+        if (range === 'all' || card.dataset.price === range) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html> 

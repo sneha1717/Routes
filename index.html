@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Khordha</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="images/favicon.ico">
+</head>
+<body>
+  <!-- Navbar Include -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Hero Section -->
+  <section class="hero-section d-flex align-items-center justify-content-center text-center" style="background-image: url('images/khordha-hero.jpg');">
+    <div class="hero-overlay"></div>
+    <div class="container position-relative z-2">
+      <h1 class="display-3 fw-bold text-white mb-3 animate__animated animate__fadeInDown">Welcome to Explore Khordha</h1>
+      <p class="lead text-white mb-4 animate__animated animate__fadeInUp">Discover the vibrant culture, stunning landscapes, and hidden gems of Khordha District, Odisha.</p>
+      <a href="districts.html" class="btn btn-lg btn-warning shadow-lg animate__animated animate__pulse animate__infinite">Explore Now</a>
+    </div>
+  </section>
+
+  <!-- Floating Chatbot Icon -->
+  <div id="chatbot-icon" class="floating-icon" title="Chat with us!">
+    <img src="images/chatbot.svg" alt="Chatbot" width="48" height="48">
+  </div>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollTopBtn" class="scroll-top-btn" title="Go to top">&#8679;</button>
+
+  <!-- Light/Dark Mode Toggle -->
+  <button id="darkModeToggle" class="dark-mode-toggle" title="Toggle light/dark mode">
+    <span id="darkModeIcon">🌙</span>
+  </button>
+
+  <!-- Footer Include -->
+  <div id="footer-placeholder"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    // Load navbar and footer
+    fetch('header.html').then(res => res.text()).then(data => {
+      document.getElementById('navbar-placeholder').innerHTML = data;
+    });
+    fetch('footer.html').then(res => res.text()).then(data => {
+      document.getElementById('footer-placeholder').innerHTML = data;
+    });
+  </script>
+</body>
+</html> 

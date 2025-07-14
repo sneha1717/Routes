@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lingaraj Temple | Explore Khordha</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="icon" href="../images/favicon.ico">
+</head>
+<body>
+  <!-- Navbar Include -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Title & Carousel -->
+  <section class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <div id="lingarajCarousel" class="carousel slide shadow" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="" class="d-block w-100" alt="Lingaraj Temple 1">
+            </div>
+            <div class="carousel-item">
+              <img src="" class="d-block w-100" alt="Lingaraj Temple 2">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#lingarajCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#lingarajCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold mb-3">Lingaraj Temple</h1>
+        <p class="lead">Lingaraj Temple, dating back to the 11th century, is the largest and one of the most revered temples in Bhubaneswar. It is a masterpiece of Kalinga architecture and a major pilgrimage site dedicated to Lord Shiva.</p>
+        <p>The temple complex is adorned with exquisite carvings, towering spires, and a sacred tank (Bindu Sagar). Non-Hindus are not allowed inside the main sanctum but can view the temple from a platform outside. The annual Shivaratri festival draws thousands of devotees.</p>
+        <a href="https://goo.gl/maps/4Qk8Qw1Qw2vQ2QkA7" target="_blank" class="btn btn-warning mt-2">Get Directions</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Google Maps -->
+  <section class="container mb-5">
+    <h2 class="h5 mb-3">Location</h2>
+    <div class="ratio ratio-16x9 rounded shadow">
+      <iframe src="https://www.google.com/maps?q=Lingaraj+Temple+Bhubaneswar&output=embed" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <!-- Nearby Food & Hotels -->
+  <section class="container mb-5">
+    <h2 class="h5 mb-3">Nearby Food & Hotels</h2>
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Hotel Lingaraj</h5>
+            <p class="mb-1">Rating: ⭐⭐⭐ (3.8/5)</p>
+            <p class="mb-1">Phone: <a href="tel:+919876543214">+91 98765 43214</a></p>
+            <p class="mb-1">Old Town, Bhubaneswar</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Shivam Restaurant</h5>
+            <p class="mb-1">Rating: ⭐⭐⭐ (3.9/5)</p>
+            <p class="mb-1">Phone: <a href="tel:+919812345682">+91 98123 45682</a></p>
+            <p class="mb-1">Near Bindu Sagar, Bhubaneswar</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Travel Times -->
+  <section class="container mb-5">
+    <h2 class="h5 mb-3">Sample Travel Times</h2>
+    <ul>
+      <li>By Car: 20 min from Bhubaneswar Railway Station</li>
+      <li>By Train: 10 min auto from Bhubaneswar Station</li>
+      <li>By Bus: 25 min from Baramunda Bus Stand</li>
+    </ul>
+  </section>
+
+  <!-- Floating Chatbot Icon -->
+  <div id="chatbot-icon" class="floating-icon" title="Chat with us!">
+    <img src="../images/chatbot.svg" alt="Chatbot" width="48" height="48">
+  </div>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollTopBtn" class="scroll-top-btn" title="Go to top">&#8679;</button>
+
+  <!-- Light/Dark Mode Toggle -->
+  <button id="darkModeToggle" class="dark-mode-toggle" title="Toggle light/dark mode">
+    <span id="darkModeIcon">🌙</span>
+  </button>
+
+  <!-- Footer Include -->
+  <div id="footer-placeholder"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/script.js"></script>
+  <script>
+    // Load navbar and footer
+    fetch('../header.html').then(res => res.text()).then(data => {
+      document.getElementById('navbar-placeholder').innerHTML = data;
+    });
+    fetch('../footer.html').then(res => res.text()).then(data => {
+      document.getElementById('footer-placeholder').innerHTML = data;
+    });
+  </script>
+</body>
+</html> 
