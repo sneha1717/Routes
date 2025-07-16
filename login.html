@@ -5,6 +5,100 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login - Explore Khordha</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom right, #fff7ed, #ffe4e6);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  padding: 24px;
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.icon-circle {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: linear-gradient(to right, #f97316, #dc2626);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+}
+
+.card-body label {
+  display: block;
+  margin: 12px 0 4px;
+  font-weight: bold;
+}
+
+.card-body input[type="email"],
+.card-body input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.eye-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#submitBtn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px;
+  background: linear-gradient(to right, #f97316, #dc2626);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.signup-text {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.signup-text a {
+  color: #ea580c;
+  text-decoration: none;
+  font-weight: bold;
+}
+  </style>
 </head>
 <body>
   <div class="login-container">
