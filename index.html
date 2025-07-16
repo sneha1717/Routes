@@ -3,51 +3,1006 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Explore Khordha</title>
+  <title>Explore Khordha - Discover Odisha's Hidden Gems</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" href="images/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #2C5530;
+      --secondary-color: #8B4513;
+      --accent-color: #20B2AA;
+      --teal-dark: #008B8B;
+      --teal-light: #40E0D0;
+      --brown-dark: #8B4513;
+      --brown-light: #CD853F;
+      --forest-green: #228B22;
+      --sage-green: #87A96B;
+      --ivory: #FFFFF0;
+      --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.1);
+      --shadow-medium: 0 15px 35px rgba(0, 0, 0, 0.15);
+      --shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.2);
+      --shadow-teal: 0 10px 30px rgba(32, 178, 170, 0.3);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      overflow-x: hidden;
+    }
+    .display-font { font-family: 'Playfair Display', serif; }
+    .modern-navbar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+    .modern-navbar.scrolled {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: var(--shadow-light);
+      padding: 0.5rem 0;
+    }
+    .modern-navbar.hidden {
+      transform: translateY(-100%);
+      transition: transform 0.3s;
+    }
+    .navbar-brand {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-color) !important;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .brand-icon { color: var(--accent-color); font-size: 2rem; }
+    .nav-link {
+      color: #333 !important;
+      font-weight: 500;
+      padding: 0.5rem 1rem !important;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    .nav-link:hover::before { left: 100%; }
+    .nav-link:hover {
+      color: var(--accent-color) !important;
+      background: rgba(255, 107, 53, 0.1);
+      transform: translateY(-2px);
+    }
+    /* Hero Section */
+    .hero-section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+      background: #1a4230;
+      overflow: hidden;
+    }
+    .hero-slideshow {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 1;
+      background: #1a4230;
+    }
+    .hero-slide-img {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1.5s cubic-bezier(.52,.01,.38,1.01);
+      z-index: 1;
+    }
+    .hero-slide-img.active { opacity: 1; }
+    .hero-slide-img:not(.active) { pointer-events: none; }
+    .slideshow-indicators {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 3;
+    }
+    .indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .indicator.active {
+      background: white;
+      transform: scale(1.2);
+    }
+    .hero-content {
+      z-index: 2;
+      max-width: 800px;
+      padding: 2rem;
+      position: relative;
+      transform: translateY(0);
+      transition: transform 0.1s ease-out;
+    }
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    .hero-subtitle {
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+    .cta-button {
+      background: linear-gradient(45deg, var(--accent-color), var(--teal-dark));
+      color: white;
+      border: none;
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-medium);
+    }
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-heavy);
+      background: linear-gradient(45deg, var(--teal-dark), var(--accent-color));
+    }
+    /* About Section */
+    .about-section { padding: 5rem 0; background: var(--ivory);}
+    .section-title {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-color), var(--teal-dark));
+      border-radius: 2px;
+    }
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .about-text { font-size: 1.1rem; line-height: 1.8; color: #555;}
+    .about-image {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-medium);
+      transition: transform 0.3s ease;
+    }
+    .about-image:hover { transform: scale(1.05);}
+    .about-image img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+    /* Featured Places */
+    .featured-section { padding: 5rem 0; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);}
+    .places-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .place-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-light);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .place-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-heavy);
+    }
+    .place-image {
+      height: 250px;
+      overflow: hidden;
+      position: relative;
+    }
+    .place-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .place-card:hover .place-image img { transform: scale(1.1);}
+    .place-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(45deg, rgba(44, 85, 48, 0.8), rgba(32, 178, 170, 0.8));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .place-card:hover .place-overlay { opacity: 1;}
+    .overlay-text {
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .place-content { padding: 2rem;}
+    .place-title { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1rem;}
+    .place-description { color: #666; line-height: 1.6; margin-bottom: 1.5rem;}
+    .place-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .feature-tag {
+      background: rgba(32, 178, 170, 0.1);
+      color: var(--accent-color);
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .learn-more-btn {
+      background: transparent;
+      color: var(--accent-color);
+      border: 2px solid var(--accent-color);
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .learn-more-btn:hover {
+      background: var(--accent-color);
+      color: white;
+      transform: translateY(-2px);
+    }
+    /* Culture Section */
+    .culture-section { padding: 5rem 0; background: var(--primary-color); color: white;}
+    .culture-section .section-title { color: white;}
+    .culture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .culture-card {
+      background: rgba(255, 255, 255, 0.1);
+     backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .culture-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.15);
+    }
+    .culture-icon { font-size: 3rem; color: var(--brown-light); margin-bottom: 1rem;}
+    .culture-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;}
+    .culture-description { opacity: 0.9; line-height: 1.6;}
+    /* Statistics Section */
+    .stats-section { padding: 3rem 0; background: var(--accent-color); color: white;}
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+    .stat-item { text-align: center;}
+    .stat-number { font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem;}
+    .stat-label { font-size: 1.1rem; opacity: 0.9;}
+    /* Footer */
+    .modern-footer {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      color: white;
+      padding: 4rem 0 2rem;
+    }
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .footer-section h5 { color: var(--brown-light); margin-bottom: 1rem; font-weight: 600;}
+    .footer-links { list-style: none; padding: 0;}
+    .footer-links li { margin-bottom: 0.5rem;}
+    .footer-links a {
+      color: #ccc;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .footer-links a:hover { color: var(--accent-color);}
+    .social-links { display: flex; gap: 1rem;}
+    .social-link {
+      width: 40px; height: 40px;
+      background: var(--accent-color);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white; text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .social-link:hover {
+      background: var(--teal-dark);
+      transform: translateY(-3px);
+    }
+    .footer-bottom {
+      border-top: 1px solid #444;
+      padding-top: 2rem;
+      text-align: center;
+      color: #ccc;
+    }
+    /* Floating Elements */
+    .floating-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: var(--shadow-medium);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+    .floating-btn:hover {
+      transform: scale(1.1);
+      background: var(--teal-dark);
+    }
+    .scroll-top {
+      bottom: 100px;
+      opacity: 0;
+      visibility: hidden;
+    }
+    .scroll-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.5rem; }
+      .hero-subtitle { font-size: 1.1rem; }
+      .section-title { font-size: 2.2rem; }
+      .about-content { grid-template-columns: 1fr; gap: 2rem; }
+      .places-grid { grid-template-columns: 1fr; }
+      .culture-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .slideshow-indicators { bottom: 20px; }
+      .indicator { width: 10px; height: 10px; }
+    }
+    .contact-section { background: #FAFAFA; padding-bottom: 4rem;}
+  </style>
 </head>
 <body>
-  <!-- Navbar Include -->
-  <div id="navbar-placeholder"></div>
+  <!-- Modern Navbar -->
+  <nav class="modern-navbar">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <a href="#" class="navbar-brand">
+          <i class="fas fa-temple-hindu brand-icon"></i>
+          <span class="display-font">Explore Khordha</span>
+        </a>
+        <div class="d-flex gap-3">
+          <a href="#home" class="nav-link" aria-label="Navigate to Home section">Home</a>
+          <a href="#about" class="nav-link" aria-label="Navigate to About section">About</a>
+          <a href="#places" class="nav-link" aria-label="Navigate to Places section">Places</a>
+          <a href="#culture" class="nav-link" aria-label="Navigate to Culture section">Culture</a>
+          <a href="#contact" class="nav-link" aria-label="Navigate to Contact section">Contact</a>
+        </div>
+      </div>
+    </div>
+  </nav>
 
-  <!-- Hero Section -->
-  <section class="hero-section d-flex align-items-center justify-content-center text-center" style="background-image: url('images/khordha-hero.jpg');">
-    <div class="hero-overlay"></div>
-    <div class="container position-relative z-2">
-      <h1 class="display-3 fw-bold text-white mb-3 animate__animated animate__fadeInDown">Welcome to Explore Khordha</h1>
-      <p class="lead text-white mb-4 animate__animated animate__fadeInUp">Discover the vibrant culture, stunning landscapes, and hidden gems of Khordha District, Odisha.</p>
-      <a href="districts.html" class="btn btn-lg btn-warning shadow-lg animate__animated animate__pulse animate__infinite">Explore Now</a>
+  <!-- Hero Section with Slideshow -->
+  <section id="home" class="hero-section">
+    <div class="hero-slideshow">
+      <img class="hero-slide-img active" src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=1600&q=80" alt="Khordha Forest" loading="eager">
+      <img class="hero-slide-img active" src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?auto=format&fit=crop&w=1600&q=80" alt="Odisha River" loading="eager">
+      <img class="hero-slide-img" src="https://images.unsplash.com/photo-1574694946432-1c0b2e8f8e03?auto=format&fit=crop&w=1600&q=80" alt="Temple Art" loading="eager">
+      <img class="hero-slide-img" src="https://images.unsplash.com/photo-1589308078059-be1415eab4c2?auto=format&fit=crop&w=1600&q=80" alt="Ancient Ruins" loading="eager">
+      <img class="hero-slide-img" src="https://images.unsplash.com/photo-1620766182966-c6eb5ed2b788?auto=format&fit=crop&w=1600&q=80" alt="Chilika Sunset" loading="lazy">
+    </div>
+    <div class="hero-content">
+      <h1 class="hero-title display-font">Discover Khordha</h1>
+      <p class="hero-subtitle">Experience the spiritual heart of Odisha - Where ancient temples meet modern heritage</p>
+      <button class="cta-button" tabindex="0">
+        <i class="fas fa-compass me-2"></i>
+        Explore Now
+      </button>
+    </div>
+    <div class="slideshow-indicators">
+      <span class="indicator active" data-slide="0"></span>
+      <span class="indicator" data-slide="1"></span>
+      <span class="indicator" data-slide="2"></span>
+      <span class="indicator" data-slide="3"></span>
+      <span class="indicator" data-slide="4"></span>
     </div>
   </section>
 
-  <!-- Floating Chatbot Icon -->
-  <div id="chatbot-icon" class="floating-icon" title="Chat with us!">
-    <img src="images/chatbot.svg" alt="Chatbot" width="48" height="48">
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <h2 class="section-title display-font">About Khordha</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>Khordha district stands as the cultural and administrative heart of Odisha, home to the magnificent Jagannath Temple in Puri and the historic city of Bhubaneswar. This sacred land seamlessly blends ancient spirituality with modern development, offering visitors a unique journey through time.</p>
+          <p>From the architectural marvels of centuries-old temples to the vibrant festivals that color the streets, Khordha district represents the essence of Odishan culture. The district's strategic location makes it the perfect gateway to explore the rich heritage of Eastern India.</p>
+          <p>Whether you're a spiritual seeker, history enthusiast, or cultural explorer, Khordha offers experiences that will leave lasting impressions on your soul.</p>
+        </div>
+        <div class="about-image">
+          <img src="https://images.unsplash.com/photo-1578593288065-b8e80c0a7a9c?auto=format&fit=crop&w=800&q=80" alt="Ancient temple in Odisha" onerror="this.src='https://via.placeholder.com/600x400/2C5530/FFFFFF?text=Ancient+Temple+Odisha'">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Places -->
+  <section id="places" class="featured-section">
+    <div class="container">
+      <h2 class="section-title display-font">Sacred Places</h2>
+      <div class="places-grid">
+        <div class="place-card">
+          <div class="place-image">
+            <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80" alt="Jagannath Temple" onerror="this.src='https://via.placeholder.com/400x250/20B2AA/FFFFFF?text=Jagannath+Temple'">
+            <div class="place-overlay">
+              <div class="overlay-text">Explore Temple</div>
+            </div>
+          </div>
+          <div class="place-content">
+            <h3 class="place-title">Jagannath Temple, Puri</h3>
+            <p class="place-description">One of the most sacred Hindu temples, the Jagannath Temple in Puri is renowned for its annual Rath Yatra festival and magnificent architecture.</p>
+            <div class="place-features">
+              <span class="feature-tag">Sacred Site</span>
+              <span class="feature-tag">Annual Festival</span>
+              <span class="feature-tag">Architecture</span>
+            </div>
+            <a href="#" class="learn-more-btn" aria-label="Learn more about Jagannath Temple">Learn More</a>
+          </div>
+        </div>
+
+        <div class="place-card">
+          <div class="place-image">
+            <img src="https://images.unsplash.com/photo-1578593288065-b8e80c0a7a9c?auto=format&fit=crop&w=800&q=80" alt="Lingaraj Temple" onerror="this.src='https://via.placeholder.com/400x250/2C5530/FFFFFF?text=Lingaraj+Temple'">
+            <div class="place-overlay">
+              <div class="overlay-text">Discover Heritage</div>
+            </div>
+          </div>
+          <div class="place-content">
+            <h3 class="place-title">Lingaraj Temple</h3>
+            <p class="place-description">The largest temple in Bhubaneswar, dedicated to Lord Shiva, showcasing the pinnacle of Kalinga architecture from the 11th century.</p>
+            <div class="place-features">
+              <span class="feature-tag">Ancient Architecture</span>
+              <span class="feature-tag">Shiva Temple</span>
+              <span class="feature-tag">11th Century</span>
+            </div>
+            <a href="#" class="learn-more-btn" aria-label="Learn more about Lingaraj Temple">Learn More</a>
+          </div>
+        </div>
+
+        <div class="place-card">
+          <div class="place-image">
+            <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=80" alt="Konark Sun Temple" onerror="this.src='https://via.placeholder.com/400x250/8B4513/FFFFFF?text=Konark+Sun+Temple'">
+            <div class="place-overlay">
+              <div class="overlay-text">Marvel at Art</div>
+            </div>
+          </div>
+          <div class="place-content">
+            <h3 class="place-title">Konark Sun Temple</h3>
+            <p class="place-description">A UNESCO World Heritage Site, this 13th-century temple is designed as a colossal chariot of the Sun God with intricate stone carvings.</p>
+            <div class="place-features">
+              <span class="feature-tag">UNESCO Site</span>
+              <span class="feature-tag">Sun Temple</span>
+              <span class="feature-tag">Stone Carvings</span>
+            </div>
+            <a href="#" class="learn-more-btn" aria-label="Learn more about Konark Sun Temple">Learn More</a>
+          </div>
+        </div>
+
+        <div class="place-card">
+          <div class="place-image">
+            <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80" alt="Chilika Lake" onerror="this.src='https://via.placeholder.com/400x250/40E0D0/FFFFFF?text=Chilika+Lake'">
+            <div class="place-overlay">
+              <div class="overlay-text">Nature's Beauty</div>
+            </div>
+          </div>
+          <div class="place-content">
+            <h3 class="place-title">Chilika Lake</h3>
+            <p class="place-description">Asia's largest brackish water lagoon, famous for migratory birds, dolphins, and stunning sunsets over the waters.</p>
+            <div class="place-features">
+              <span class="feature-tag">Wildlife</span>
+              <span class="feature-tag">Migratory Birds</span>
+              <span class="feature-tag">Natural Beauty</span>
+            </div>
+            <a href="#" class="learn-more-btn" aria-label="Learn more about Chilika Lake">Learn More</a>
+          </div>
+        </div>
+
+        <div class="place-card">
+          <div class="place-image">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80" alt="Puri Beach" onerror="this.src='https://via.placeholder.com/400x250/87A96B/FFFFFF?text=Puri+Beach'">
+            <div class="place-overlay">
+              <div class="overlay-text">Relax & Rejuvenate</div>
+            </div>
+          </div>
+          <div class="place-content">
+            <h3 class="place-title">Puri Beach</h3>
+            <p class="place-description">The golden sands of Puri Beach offer spiritual baths, vibrant sunrises, and a perfect blend of pilgrimage and leisure.</p>
+            <div class="place-features">
+              <span class="feature-tag">Golden Sand</span>
+              <span class="feature-tag">Spiritual Baths</span>
+              <span class="feature-tag">Sunrise Views</span>
+            </div>
+            <a href="#" class="learn-more-btn" aria-label="Learn more about Puri Beach">Learn More</a>
+          </div>
+        </div>
+
+        <div class="place-card">
+          <div class="place-image">
+            <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80" alt="Bhubaneswar Temples" onerror="this.src='https://via.placeholder.com/400x250/228B22/FFFFFF?text=Temple+City'">
+            <div class="place-overlay">
+              <div class="overlay-text">Temple City</div>
+            </div>
+          </div>
+          <div class="place-content">
+            <h3 class="place-title">Temple City Bhubaneswar</h3>
+            <p class="place-description">Known as the 'Temple City of India', Bhubaneswar houses over 700 temples showcasing the evolution of Odishan architecture.</p>
+            <div class="place-features">
+              <span class="feature-tag">700+ Temples</span>
+              <span class="feature-tag">Architecture</span>
+              <span class="feature-tag">Heritage City</span>
+            </div>
+            <a href="#" class="learn-more-btn" aria-label="Learn more about Temple City Bhubaneswar">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Culture Section -->
+  <section id="culture" class="culture-section">
+    <div class="container">
+      <h2 class="section-title display-font" style="color: white;">Rich Cultural Heritage</h2>
+      <div class="culture-grid">
+        <div class="culture-card">
+          <i class="fas fa-music culture-icon"></i>
+          <h3 class="culture-title">Classical Dance</h3>
+          <p class="culture-description">Odissi, one of India's classical dance forms, originated in the temples of Odisha and tells stories through graceful movements and expressions.</p>
+        </div>
+        <div class="culture-card">
+          <i class="fas fa-palette culture-icon"></i>
+          <h3 class="culture-title">Traditional Arts</h3>
+          <p class="culture-description">Pattachitra paintings, stone carvings, and palm leaf manuscripts represent the rich artistic traditions of Khordha district.</p>
+        </div>
+        <div class="culture-card">
+          <i class="fas fa-calendar-alt culture-icon"></i>
+          <h3 class="culture-title">Festivals</h3>
+          <p class="culture-description">The world-famous Rath Yatra and numerous other festivals showcase the vibrant cultural calendar of the region.</p>
+        </div>
+        <div class="culture-card">
+          <i class="fas fa-utensils culture-icon"></i>
+          <h3 class="culture-title">Culinary Delights</h3>
+          <p class="culture-description">From the famous Jagannath Temple prasad to traditional sweets like Rasgulla and Chhena Poda, taste the flavors of Odisha.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics Section -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">700+</div>
+          <div class="stat-label">Ancient Temples</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">1000+</div>
+          <div class="stat-label">Years of History</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Cultural Sites</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">2M+</div>
+          <div class="stat-label">Annual Visitors</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <h2 class="section-title display-font">Plan Your Visit</h2>
+      <div class="row">
+        <div class="col-lg-6 mb-4">
+          <div class="contact-card">
+            <div class="contact-info">
+              <h4>Get in Touch</h4>
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <span>Khordha District, Odisha, India</span>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <span>+91 98765 43210</span>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <span>info@explorekhordha.com</span>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <span>Best time to visit: October to March</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+          <div class="contact-card">
+            <div class="contact-form">
+              <h4>Send us a Message</h4>
+              <form>
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                  <input type="email" class="form-control" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                  <i class="fas fa-paper-plane me-2"></i>Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="modern-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h5><i class="fas fa-temple-hindu me-2"></i>Explore Khordha</h5>
+          <p>Discover the spiritual heart of Odisha through our comprehensive guide to temples, culture, and heritage sites.</p>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link" aria-label="Subscribe to our YouTube channel"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h5>Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Khordha</a></li>
+            <li><a href="#places">Sacred Places</a></li>
+            <li><a href="#culture">Culture</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h5>Popular Destinations</h5>
+          <ul class="footer-links">
+            <li><a href="#">Jagannath Temple</a></li>
+            <li><a href="#">Lingaraj Temple</a></li>
+            <li><a href="#">Konark Sun Temple</a></li>
+            <li><a href="#">Chilika Lake</a></li>
+            <li><a href="#">Puri Beach</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h5>Travel Information</h5>
+          <ul class="footer-links">
+            <li><a href="#">Best Time to Visit</a></li>
+            <li><a href="#">How to Reach</a></li>
+            <li><a href="#">Local Transportation</a></li>
+            <li><a href="#">Accommodation</a></li>
+            <li><a href="#">Travel Tips</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Explore Khordha. Made with ❤️ for travelers and devotees.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Buttons -->
+  <div class="floating-btn animate-float" id="chatbot" title="Chat with us">
+    <i class="fas fa-comments"></i>
+  </div>
+  <div class="floating-btn scroll-top" id="scrollTop" title="Back to top">
+    <i class="fas fa-arrow-up"></i>
   </div>
 
-  <!-- Scroll to Top Button -->
-  <button id="scrollTopBtn" class="scroll-top-btn" title="Go to top">&#8679;</button>
-
-  <!-- Light/Dark Mode Toggle -->
-  <button id="darkModeToggle" class="dark-mode-toggle" title="Toggle light/dark mode">
-    <span id="darkModeIcon">🌙</span>
-  </button>
-
-  <!-- Footer Include -->
-  <div id="footer-placeholder"></div>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/script.js"></script>
   <script>
-    // Load navbar and footer
-    fetch('header.html').then(res => res.text()).then(data => {
-      document.getElementById('navbar-placeholder').innerHTML = data;
+    // Navbar scroll behavior
+    const navbar = document.querySelector('.modern-navbar');
+    const scrollTopBtn = document.getElementById('scrollTop');
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+    function hideShowNavbarBehavior() {
+      const scrollPosition = window.scrollY;
+      if (scrollPosition > lastScrollY && scrollPosition > 100) {
+        navbar.classList.add('hidden');
+      } else if (scrollPosition < lastScrollY) {
+        navbar.classList.remove('hidden');
+      }
+      if (scrollPosition > 100) {
+        navbar.classList.add('scrolled');
+        scrollTopBtn.classList.add('show');
+      } else {
+        navbar.classList.remove('scrolled');
+        scrollTopBtn.classList.remove('show');
+      }
+      lastScrollY = scrollPosition;
+    }
+    function handleScroll() {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          hideShowNavbarBehavior();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+    window.addEventListener('scroll', handleScroll);
+
+    // Slideshow functionality (with <img>)
+    const slides = document.querySelectorAll('.hero-slide-img');
+    const indicators = document.querySelectorAll('.indicator');
+    let currentSlide = 0;
+    let slideInterval = null;
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+      indicators.forEach((indicator, i) => {
+        indicator.classList.toggle('active', i === index);
+      });
+      currentSlide = index;
+    }
+    function nextSlide() {
+      showSlide((currentSlide + 1) % slides.length);
+    }
+    function startSlideShow() {
+      if (slideInterval) clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlide, 5000);
+    }
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        showSlide(index);
+        startSlideShow();
+      });
     });
-    fetch('footer.html').then(res => res.text()).then(data => {
-      document.getElementById('footer-placeholder').innerHTML = data;
+    startSlideShow();
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
     });
+
+    // Scroll to top functionality
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Chatbot functionality
+    document.getElementById('chatbot').addEventListener('click', () => {
+      alert('🙏 Namaste! Our virtual guide is coming soon to help you explore Khordha\'s spiritual treasures!');
+    });
+
+    // Animate statistics on scroll
+    const animateStats = () => {
+      const statNumbers = document.querySelectorAll('.stat-number');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const target = entry.target;
+            const finalValue = target.textContent;
+            const numValue = parseInt(finalValue.replace(/[^\d]/g, ''));
+            const suffix = finalValue.replace(/[\d]/g, '');
+            let current = 0;
+            const increment = Math.max(1, Math.floor(numValue / 80));
+            const timer = setInterval(() => {
+              current += increment;
+              if (current >= numValue) {
+                target.textContent = finalValue;
+                clearInterval(timer);
+              } else {
+                target.textContent = Math.floor(current) + suffix;
+              }
+            }, 30);
+            observer.unobserve(target);
+          }
+        });
+      }, { threshold: 0.5 });
+      statNumbers.forEach(stat => observer.observe(stat));
+    };
+    animateStats();
+
+    // Parallax effect for hero slideshow
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const hero = document.querySelector('.hero-section');
+      const heroContent = document.querySelector('.hero-content');
+      if (hero && scrolled < hero.offsetHeight) {
+        const slideshow = document.querySelector('.hero-slideshow');
+        if (slideshow) {
+          slideshow.style.transform = `translateY(${scrolled * 0.3}px)`;
+        }
+        if (heroContent) {
+          heroContent.style.transform = `translateY(${scrolled * -0.1}px)`;
+        }
+      }
+    });
+
+    // Touch support for mobile slideshow
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const heroSection = document.querySelector('.hero-section');
+    if (heroSection) {
+      heroSection.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      });
+      heroSection.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      });
+    }
+    function handleSwipe() {
+      const swipeDistance = touchEndX - touchStartX;
+      const minSwipeDistance = 50;
+      if (Math.abs(swipeDistance) > minSwipeDistance) {
+        if (swipeDistance > 0) {
+          // Swipe right - previous slide
+          showSlide(currentSlide === 0 ? slides.length - 1 : currentSlide - 1);
+        } else {
+          // Swipe left - next slide
+          nextSlide();
+        }
+        startSlideShow();
+      }
+    }
+
+    // Fallback for all images (universal)
+    document.querySelectorAll('img').forEach(img => {
+      img.onerror = function() {
+        this.src = 'https://via.placeholder.com/800x400/cccccc/333333?text=Image+Not+Found';
+      };
+    });
+
+    // Animate elements on load (fade up)
+    document.addEventListener('DOMContentLoaded', () => {
+      const elementsToAnimate = document.querySelectorAll('.hero-content, .about-content, .place-card');
+      elementsToAnimate.forEach((element, index) => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+          element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+          element.style.opacity = '1';
+          element.style.transform = 'translateY(0)';
+        }, index * 100 + 200);
+      });
+    });
+
+    // Add hover effect to culture cards
+    document.querySelectorAll('.culture-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-10px) scale(1.02)';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+
+    // Enhanced form interactions
+    const formInputs = document.querySelectorAll('.form-control');
+    formInputs.forEach(input => {
+      input.addEventListener('focus', () => {
+        input.parentElement.classList.add('focused');
+      });
+      input.addEventListener('blur', () => {
+        if (input.value === '') {
+          input.parentElement.classList.remove('focused');
+        }
+      });
+    });
+
+    // Contact form submission animation
+    const contactForm = document.querySelector('.contact-form form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const submitBtn = contactForm.querySelector('.submit-btn');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+        submitBtn.disabled = true;
+        setTimeout(() => {
+          submitBtn.innerHTML = '<i class="fas fa-check me-2"></i>Message Sent!';
+          submitBtn.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+          setTimeout(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            submitBtn.style.background = '';
+            contactForm.reset();
+            alert('🙏 Thank you for your message! We\'ll get back to you soon with information about exploring Khordha!');
+          }, 2000);
+        }, 1500);
+      });
+    }
   </script>
 </body>
-</html> 
+</html>
